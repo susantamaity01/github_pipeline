@@ -9,8 +9,3 @@ terraform {
 provider "azurerm" {
    features {}
 }
-
-resource "azurerm_resource_group" "rg01" {
-  name = "github"
-  loaction = "centralindia"
-}
