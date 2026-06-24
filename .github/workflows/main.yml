@@ -17,8 +17,8 @@ jobs:
         run: az login --service-principal --username 79cdf5ef-71a8-41cb-a5f2-f3ac4e7fbf87 --password 5vq8Q~bL93tzlGLStmwSmRBY3nfPtA4xI8Dhkdna --tenant 251e8d5a-0557-476d-8f02-7b08a04f861e
 
         # INSTALL TERRAFORM
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v3
+      # - name: Setup Terraform
+      #   uses: hashicorp/setup-terraform@v3
         
       
       - name: Terraform Init
