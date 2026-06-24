@@ -1,1 +1,15 @@
+name: Dummy Workflow
 
+on: 
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: self-hosted
+    steps:
+      - uses: action/checkout@v4
+      - name: Run a one-line scropt
+        run: echo "Hellow, world!"
+      - name: azure login
+        run: az login --service-principal --username ee5c28cb-b1b2-4ecf-9745-82a94d92b58c --password Ukv8Q~dP5CNCpb3.5H_GXQx68FuBV~We6agQIalf --tenant 251e8d5a-0557-476d-8f02-7b08a04f861e
+
+  
