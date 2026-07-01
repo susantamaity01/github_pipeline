@@ -31,7 +31,12 @@ jobs:
         uses: terraform-linters/setup-tflint@v6.3.0
         with:
           tflint_version: latest
-        
+
+      - name: Run TruffleHog Secret Scan
+        uses: trufflesecurity/trufflehog@v3.63.0
+        with:
+          path: ./
+           
       # 5. Terraform Plan
       - name: Terraform Plan
         run: terraform plan
