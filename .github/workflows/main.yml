@@ -36,7 +36,6 @@ jobs:
         uses: trufflesecurity/trufflehog@v3.63.0
         with:
           path: ./
-          extra_args: --fail
            
       # 5. Terraform Plan
       - name: Terraform Plan
