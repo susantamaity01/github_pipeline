@@ -24,10 +24,11 @@ jobs:
       - name: Terraform Init
         run: terraform init
 
-      - name: Setup tfsec
-        uses: Flydiverny/setup-tfsec@v1
-        with:
-          working_directory: .
+      - name: Run tfsec
+        uses: aquasecurity/tfsec-action@v1.0.3
+       
+      - name: Terraform Plan
+        run: terraform plan
         
 
       # 5. Terraform Plan
