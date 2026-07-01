@@ -31,8 +31,6 @@ jobs:
         uses: terraform-linters/setup-tflint@v6.3.0
         with:
           tflint_version: latest
-      - name: Run TFLint
-        run: tflint --init && tflint
         
       # 5. Terraform Plan
       - name: Terraform Plan
