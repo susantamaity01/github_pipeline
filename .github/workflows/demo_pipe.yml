@@ -24,13 +24,13 @@ jobs:
       - name: azure login
         run: az login --service-principal --username 5155679f-5b82-4589-8521-6c6c2a50a73c --password _e68Q~wnwEcMu0Hq66e21CvV2BAHuuljzoCW0aAm --tenant 44ff9492-6357-4790-9759-8d5b4666c643
 
-      - name: Security Scan
-        uses: aquasecurity/trivy-action@master
+      - name: Run tfsec
+        uses: aquasecurity/tfsec-action@v1.0.3
+        
+      - name: Setup TFLint
+        uses: terraform-linters/setup-tflint@v6.3.0
         with:
-          scan-type: fs
-          scan-ref: .
-          severity: HIGH,CRITICAL
-          exit-code: '1'
+          tflint_version: latest
 
       - name: Terraform Setup
         uses: hashicorp/setup-terraform@v3
