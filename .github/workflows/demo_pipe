@@ -1,0 +1,78 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+
+  # =========================
+  # Stage 1: Scan & Plan
+  # =========================
+  scan-and-plan:
+    name: Scan and Plan
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v4
+
+      - name: Security Scan
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: fs
+          scan-ref: .
+          severity: HIGH,CRITICAL
+          exit-code: '1'
+
+      - name: Terraform Setup
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Terraform Init
+        run: terraform init
+
+      - name: Terraform Validate
+        run: terraform validate
+
+      - name: Terraform Plan
+        run: terraform plan -out=tfplan
+
+      - name: Upload Terraform Plan
+        uses: actions/upload-artifact@v4
+        with:
+          name: terraform-plan
+          path: tfplan
+
+
+  # =========================
+  # Stage 2: Deploy
+  # =========================
+  deploy:
+    name: Deploy
+    needs: scan-and-plan
+    runs-on: ubuntu-latest
+
+    environment:
+      name: production
+
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v4
+
+      - name: Terraform Setup
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Terraform Init
+        run: terraform init
+
+      - name: Download Terraform Plan
+        uses: actions/download-artifact@v4
+        with:
+          name: terraform-plan
+
+      - name: Terraform Apply
+        run: terraform apply -auto-approve tfplan
