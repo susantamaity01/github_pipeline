@@ -3,7 +3,8 @@ name: Terraform
 on:
   push:
     branches:
-      - "**"
+      - feature
+      - main
 
   pull_request:
     branches:
@@ -16,6 +17,10 @@ jobs:
   terraform-plan:
     name: Terraform Plan
     runs-on: ubuntu-latest
+    # Plan only on feature branch and PR
+    if: |
+      (github.event_name == 'push' && github.ref == 'refs/heads/feature') ||
+      github.event_name == 'pull_request'
 
     steps:
       - name: Checkout code
