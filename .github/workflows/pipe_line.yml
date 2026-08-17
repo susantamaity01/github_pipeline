@@ -17,10 +17,6 @@ jobs:
     name: Terraform Plan
     runs-on: ubuntu-latest
 
-    defaults:
-      run:
-        working-directory: environments/preprod
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -57,9 +53,6 @@ jobs:
     # Apply ONLY after push to main
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
 
-    defaults:
-      run:
-        working-directory: environments/preprod
 
     steps:
       - name: Checkout code
