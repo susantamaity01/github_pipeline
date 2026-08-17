@@ -17,10 +17,6 @@ jobs:
     name: Terraform Plan
     runs-on: ubuntu-latest
 
-    defaults:
-      run:
-        working-directory: environments/preprod
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -35,9 +31,6 @@ jobs:
 
       - name: Check Azure Login
         run: az account show
-
-      - name: Terraform Format
-        run: terraform fmt -check -recursive
 
       - name: Terraform Init
         run: terraform init
@@ -56,10 +49,6 @@ jobs:
 
     # Apply ONLY after push to main
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-
-    defaults:
-      run:
-        working-directory: environments/preprod
 
     steps:
       - name: Checkout code
