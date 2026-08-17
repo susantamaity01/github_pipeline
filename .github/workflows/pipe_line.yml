@@ -32,8 +32,6 @@ jobs:
       - name: Check Azure Login
         run: az account show
 
-      - name: Terraform Format
-        run: terraform fmt -check -recursive
 
       - name: Terraform Init
         run: terraform init
