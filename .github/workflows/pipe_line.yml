@@ -32,6 +32,7 @@ jobs:
       - name: Check Azure Login
         run: az account show
 
+
       - name: Terraform Init
         run: terraform init
 
@@ -49,6 +50,7 @@ jobs:
 
     # Apply ONLY after push to main
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+
 
     steps:
       - name: Checkout code
