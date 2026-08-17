@@ -29,17 +29,9 @@ jobs:
         uses: hashicorp/setup-terraform@v3
 
       - name: Azure Login
-        run: |
-          az login \
-            --service-principal \
-            --username "9eac3105-2ec2-4f37-8b90-3d1d851fce11" \
-            --password "W4V8Q~NmAomNOfMjBrTUT.rcYDEUB8YgKRzAgduC" \
-            --tenant "0f7010fd-209e-4344-8457-043ffb37143b"
-
-      - name: Set Azure Subscription
-        run: |
-          az account set \
-            --subscription "bc9d2c5e-f99f-4142-8f22-8f6dae37180d"
+        uses: azure/login@v2
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
 
       - name: Check Azure Login
         run: az account show
@@ -77,17 +69,10 @@ jobs:
         uses: hashicorp/setup-terraform@v3
 
       - name: Azure Login
-        run: |
-          az login \
-            --service-principal \
-            --username "9eac3105-2ec2-4f37-8b90-3d1d851fce11" \
-            --password "W4V8Q~NmAomNOfMjBrTUT.rcYDEUB8YgKRzAgduC" \
-            --tenant "0f7010fd-209e-4344-8457-043ffb37143b"
+        uses: azure/login@v2
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      - name: Set Azure Subscription
-        run: |
-          az account set \
-            --subscription "bc9d2c5e-f99f-4142-8f22-8f6dae37180d"
 
       - name: Check Azure Login
         run: az account show
